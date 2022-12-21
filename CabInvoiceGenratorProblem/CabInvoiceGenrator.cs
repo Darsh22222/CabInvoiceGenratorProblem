@@ -18,19 +18,14 @@ namespace CabInvoiceGenratorProblem
             this.cabFare = (distance * COST_PER_KILOMETER) + (time * COST_PER_MINUTE);
             return Math.Max(this.cabFare, MININUM_FARE);
         }
-        public double GetMultipleRidersFare(Ride[] rides)
+        public InvoiceSummary GetMultipleRidersFare(Ride[] rides)
         {
             double totalRideFare = 0.0;
             foreach (Ride ride in rides)
             {
                 totalRideFare += this.CalculateFare(ride.rideDistance, ride.rideTime);
             }
-            return totalRideFare;
-
-            double CalculateFare(double rideDistance, double rideTime)
-            {
-                throw new NotImplementedException();
-            }
+            return new InvoiceSummary(totalRideFare, rides.Length);
         }
     }
 }
