@@ -34,5 +34,15 @@ namespace CabInvoiceGenratorProblem
             InvoiceSummary invoiceSummary = this.cabInvoiceGenrator.GetMultipleRidersFare(ride);
             Assert.AreEqual(65, invoiceSummary.totalFare);
         }
+        [Test]
+        //Test to get invoice summary for userID
+        public void GivenProperDistanceAndTimeForRide_ShouldReturnFare()
+        {
+            CabInvoiceGenrator generator = new CabInvoiceGenrator();
+            Ride[] ride = { new Ride(3.0, 5.0), new Ride(2.0, 5.0) };
+            generator.MapRidesToUser("Darshan", ride);
+            InvoiceSummary summary = generator.GetInvoiceSummary("Darshan");
+            Assert.AreEqual(summary.totalFare, 60.0);
+        }
     }
 }
