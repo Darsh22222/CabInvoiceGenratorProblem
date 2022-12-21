@@ -26,5 +26,13 @@ namespace CabInvoiceGenratorProblem
             double CabFare = cabInvoiceGenrator.CalculateFare(0.1, 0.5);
             Assert.AreEqual(5, CabFare);
         }
+        [Test]
+        //Test to get aggregate fare for multiple rides
+        public void GivenProperDistanceAndTimeForMultipleRide_ShouldReturnAggregateFare()
+        {
+            Ride[] ride = { new Ride(3.0, 5.0), new Ride(2.0, 5.0), new Ride(0.1, 0.5) };
+            double INVOICE_SUMMARY = this.cabInvoiceGenrator.GetMultipleRidersFare(ride);
+            Assert.AreEqual(65, INVOICE_SUMMARY);
+        }
     }
 }
