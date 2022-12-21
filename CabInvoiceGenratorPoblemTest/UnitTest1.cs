@@ -1,5 +1,6 @@
 using CabInvoiceGenratorProblem;
 using System;
+using static CabInvoiceGenratorProblem.RideOption;
 
 namespace CabInvoiceGenratorProblem
 {
@@ -43,6 +44,22 @@ namespace CabInvoiceGenratorProblem
             generator.MapRidesToUser("Darshan", ride);
             InvoiceSummary summary = generator.GetInvoiceSummary("Darshan");
             Assert.AreEqual(summary.totalFare, 60.0);
+        }
+        [Test]
+        //Test to get fare for premium rides
+        public void GivenProperDistanceAndTimeForPremiumeRide_ShouldReturnPremiumFare()
+        {
+            try
+            {
+                double distance = -5; //in km
+                int time = 20;   //in minute
+                CabInvoiceGenrator summary = new CabInvoiceGenrator(RideType.NORMAL);
+                double fare = summary.CalculateFare(distance, time);
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual(ex.Message, "Invalid Ride Type");
+            }
         }
     }
 }
